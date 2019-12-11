@@ -1,20 +1,19 @@
 import React from "react";
 import localforage from "localforage";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 import { RawEditor } from "../components/RawEditor";
 import { Note } from "../types";
 
-localforage.config({
-  name: "Notes app"
-});
-
 export function NoteWrapper({ nid }: { nid: string }) {
   const [initialNote, setInitialNote] = React.useState<Note | null>(null);
   const [loadingNote, setLoadingNote] = React.useState(true);
 
+  console.log({ nid });
+
   React.useEffect(() => {
+    setLoadingNote(true);
+    setInitialNote(null);
     localforage.getItem<Note>(nid).then(value => {
       console.log("got initial value", value);
       if (value) {
@@ -22,7 +21,7 @@ export function NoteWrapper({ nid }: { nid: string }) {
       }
       setLoadingNote(false);
     });
-  }, []);
+  }, [nid]);
 
   if (loadingNote) {
     return <h1>Loading...</h1>;

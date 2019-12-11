@@ -10,7 +10,7 @@ export default () => {
     const note = createNote("# Title\n\nWhat's on your mind?");
     localforage
       .setItem(note.id, note)
-      .then(result => router.push(`/n/${note.id}`));
+      .then(result => router.push(`/n/${result.id}`));
   }, []);
 
   return <div>Creating new note...</div>;

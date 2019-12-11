@@ -1,13 +1,12 @@
 import React from "react";
 import localforage from "localforage";
 import { useRouter } from "next/router";
-import Link from "next/link";
-
-import { RawEditor } from "../../components/RawEditor";
-import { Note } from "../../types";
-import { createNote } from "../../utils/notes";
 import { NotesList } from "../../components/NotesList";
 import { NoteWrapper } from "../../components/NoteWrapper";
+
+localforage.config({
+  name: "Notes app"
+});
 
 function NotePage() {
   const router = useRouter();
