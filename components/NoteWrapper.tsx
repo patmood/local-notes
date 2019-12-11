@@ -1,18 +1,16 @@
 import React from "react";
 import localforage from "localforage";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
-import { RawEditor } from "../../components/RawEditor";
-import { Note } from "../../types";
-import { createNote } from "../../utils/notes";
+import { RawEditor } from "../components/RawEditor";
+import { Note } from "../types";
 
 localforage.config({
   name: "Notes app"
 });
 
-export default () => {
-  const router = useRouter();
-  const nid = router.query.nid as string;
+export function NoteWrapper({ nid }: { nid: string }) {
   const [initialNote, setInitialNote] = React.useState<Note | null>(null);
   const [loadingNote, setLoadingNote] = React.useState(true);
 
@@ -31,7 +29,14 @@ export default () => {
   }
 
   if (!initialNote) {
-    return <h1>Note not found. Create new one? [Link]</h1>;
+    return (
+      <h1>
+        Note {nid} not found.{" "}
+        <Link href="/n">
+          <a>Create new one</a>
+        </Link>
+      </h1>
+    );
   }
 
   function handleSave(text) {
@@ -45,12 +50,5 @@ export default () => {
     }
   }
 
-  return (
-    <div>
-      <h1>writer</h1>
-      {!loadingNote && (
-        <RawEditor onSave={handleSave} initialValue={initialNote.text} />
-      )}
-    </div>
-  );
-};
+  return <RawEditor onSave={handleSave} initialValue={initialNote.text} />;
+}

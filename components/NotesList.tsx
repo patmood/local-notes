@@ -1,6 +1,6 @@
 import React from "react";
 
-export function NotesList() {
+export function NotesList({ nid }: { nid?: string }) {
   return (
     <ol>
       <li>note</li>
