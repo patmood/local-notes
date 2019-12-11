@@ -1,2 +1,7 @@
 TODO:
-[] create a new note on index and redirect
+
+- Delete notes
+- Button to create note
+- Backup button
+- Import button
+- Updated at timeago
