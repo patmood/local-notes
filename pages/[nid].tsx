@@ -36,7 +36,7 @@ function NotePage() {
           }
 
           aside {
-            width: 200px;
+            width: 250px;
             flex: none;
           }
           main {
