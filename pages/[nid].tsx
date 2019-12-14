@@ -18,7 +18,7 @@ function NotePage() {
         notes.push(val)
       })
       .then(result => {
-        notes.sort((a: Note, b: Note) => b.createdAt - a.createdAt)
+        notes.sort((a: Note, b: Note) => b.updatedAt - a.updatedAt)
         setAllNotes(notes)
       })
   }, [])

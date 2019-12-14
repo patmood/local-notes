@@ -30,25 +30,25 @@ export function RawEditor({ onSave, initialValue }: RawEditorProps) {
 
   return (
     <>
-      <label>
+      <div className="wrapper">
         <SimpleMDE
           id="primary-editor"
           value={textValue}
           onChange={handleChange}
           options={options}
         />
-      </label>
+      </div>
       <style jsx global>
         {`
-          label {
+          .wrapper {
             display: block;
             max-width: 800px;
             margin: 0 auto;
             padding: ${style.space3};
           }
           .cm-s-easymde {
-            // border: none;
             border-radius: ${style.borderRadius};
+            border: ${style.borderWidth} solid ${style.stroke};
           }
           .cm-formatting-code-block {
             color: rgba(0, 0, 0, 0.3);

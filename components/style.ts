@@ -7,7 +7,7 @@ export default {
   space5: '4rem',
 
   borderRadius: '5px',
-  borderWidth: '3px',
+  borderWidth: '1px',
 
   // Colors
   stroke: '#ccc',

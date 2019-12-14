@@ -32,14 +32,13 @@ export function NotesList({
       </div>
       <ol>
         {filteredNotes.map(note => (
-          <NoteListItem key={note.id} note={note} />
+          <li key={note.id}>
+            <NoteListItem note={note} />
+          </li>
         ))}
       </ol>
       <style jsx>
         {`
-          a:focused {
-            border: 3px solid red;
-          }
           ol {
             list-style: none;
             margin: 0;
@@ -47,13 +46,11 @@ export function NotesList({
             border-radius: ${style.borderRadius};
             border: ${style.borderWidth} solid ${style.stroke};
           }
-
+          li {
+            display: flex;
+          }
           li:not(:last-child) {
             border-bottom: ${style.borderWidth} solid ${style.stroke};
-          }
-          .list-link {
-            display: block;
-            padding: 1rem;
           }
         `}
       </style>
