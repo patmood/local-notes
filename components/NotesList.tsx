@@ -4,7 +4,7 @@ import { Note } from '../types'
 import Link from 'next/link'
 import { SearchInput } from './SearchInput'
 import style from './style'
-
+import { NoteListItem } from './NoteListItem'
 const sanitizeReg = /\s*\W*/g
 
 export function NotesList({
@@ -32,18 +32,14 @@ export function NotesList({
       </div>
       <ol>
         {filteredNotes.map(note => (
-          <li key={note.id}>
-            <Link href="/[nid]" as={`/${note.id}`}>
-              <a className="list-link">
-                <div>{note.text.substr(0, 20)}</div>
-                <div>{note.createdAt}</div>
-              </a>
-            </Link>
-          </li>
+          <NoteListItem key={note.id} note={note} />
         ))}
       </ol>
       <style jsx>
         {`
+          a:focused {
+            border: 3px solid red;
+          }
           ol {
             list-style: none;
             margin: 0;
