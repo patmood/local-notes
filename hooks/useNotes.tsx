@@ -3,11 +3,13 @@ import localforage from 'localforage'
 import { Note } from '../types'
 
 const initialState = {
-  allNotes: [],
+  allNotes: {},
+  activeNote: null,
 }
 
 interface NotesState {
-  allNotes: Note[] //{ [nid: string]: Note }
+  allNotes: { [nid: string]: Note }
+  activeNote: null | Note
 }
 
 enum NotesAction {
@@ -47,5 +49,6 @@ export function useNotes(nid) {
 
   return {
     allNotes: state.allNotes,
+    activeNote: state.activeNote,
   }
 }

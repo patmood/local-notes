@@ -11,12 +11,12 @@ function NotePage() {
   const router = useRouter()
   const nid = router.query.nid as string
 
-  const { allNotes } = useNotes(nid)
+  const { allNotes, activeNote } = useNotes(nid)
 
   return (
     <div className="container">
       <aside>
-        <NotesList nid={nid} allNotes={allNotes} />
+        <NotesList activeNote={activeNote} allNotes={allNotes} />
       </aside>
       <main>
         <Header />

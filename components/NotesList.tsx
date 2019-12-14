@@ -8,22 +8,27 @@ import { NoteListItem } from './NoteListItem'
 const sanitizeReg = /\s*\W*/g
 
 export function NotesList({
-  nid,
+  activeNote,
   allNotes,
 }: {
-  nid?: string
-  allNotes: Note[]
+  activeNote: null | Note
+  allNotes: { [nid: string]: Note }
 }) {
   const [searchText, setSearchText] = React.useState('')
+  const [noteList, setNoteList] = React.useState<Note[]>([])
+
+  React.useEffect(() => {
+    setNoteList(Object.keys(allNotes).map(k => allNotes[k]))
+  }, [allNotes])
+
   const filteredNotes = React.useMemo(() => {
-    if (!searchText) return allNotes
-    return allNotes.filter(n => {
+    if (!searchText) return noteList
+    return noteList.filter(n => {
       const sourceText = n.text.toLowerCase().replace(sanitizeReg, '')
       const targetText = searchText.toLowerCase().replace(sanitizeReg, '')
-      console.log({ sourceText, targetText })
       return sourceText.includes(targetText)
     })
-  }, [allNotes, searchText])
+  }, [noteList, searchText])
 
   return (
     <div className="NotesList">
