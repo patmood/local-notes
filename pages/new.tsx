@@ -12,7 +12,9 @@ export default () => {
   const router = useRouter()
 
   React.useEffect(() => {
-    const note = createNote(faker.lorem.sentence())
+    const note = createNote(
+      `# ${faker.lorem.sentence()}\n\n${faker.lorem.sentence()}\n\n${faker.lorem.sentence()}`
+    )
     localforage
       .setItem(note.id, note)
       .then(result => router.push(`/${result.id}`))

@@ -2,6 +2,8 @@ import React from 'react'
 import localforage from 'localforage'
 import { Note } from '../types'
 import Link from 'next/link'
+import { SearchInput } from './SearchInput'
+import style from './style'
 
 const sanitizeReg = /\s*\W*/g
 
@@ -26,11 +28,7 @@ export function NotesList({
   return (
     <div className="NotesList">
       <div>
-        <input
-          type="text"
-          placeholder="Search"
-          onChange={e => setSearchText(e.currentTarget.value.trim())}
-        />
+        <SearchInput onChange={setSearchText} />
       </div>
       <ol>
         {filteredNotes.map(note => (
@@ -50,11 +48,12 @@ export function NotesList({
             list-style: none;
             margin: 0;
             padding: 0;
+            border-radius: ${style.borderRadius};
+            border: ${style.borderWidth} solid ${style.stroke};
           }
 
-          li {
-            border: 1px solid #ccc;
-            border-radius: 3px;
+          li:not(:last-child) {
+            border-bottom: ${style.borderWidth} solid ${style.stroke};
           }
           .list-link {
             display: block;

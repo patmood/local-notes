@@ -17,7 +17,10 @@ function NotePage() {
       .iterate<Note, void>((val, key, i) => {
         notes.push(val)
       })
-      .then(result => setAllNotes(notes))
+      .then(result => {
+        notes.sort((a: Note, b: Note) => b.createdAt - a.createdAt)
+        setAllNotes(notes)
+      })
   }, [])
 
   return (
