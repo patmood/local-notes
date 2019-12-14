@@ -1,16 +1,12 @@
-import React from "react";
-import localforage from "localforage";
-import { useRouter } from "next/router";
-import { NotesList } from "../../components/NotesList";
-import { NoteWrapper } from "../../components/NoteWrapper";
-
-localforage.config({
-  name: "Notes app"
-});
+import React from 'react'
+import localforage from 'localforage'
+import { useRouter } from 'next/router'
+import { NotesList } from '../../components/NotesList'
+import { NoteWrapper } from '../../components/NoteWrapper'
 
 function NotePage() {
-  const router = useRouter();
-  const nid = router.query.nid as string;
+  const router = useRouter()
+  const nid = router.query.nid as string
 
   return (
     <div className="container">
@@ -34,7 +30,7 @@ function NotePage() {
         `}
       </style>
     </div>
-  );
+  )
 }
 
-export default NotePage;
+export default NotePage
