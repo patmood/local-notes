@@ -1,27 +1,17 @@
 import React from 'react'
-import localforage from 'localforage'
+
 import { useRouter } from 'next/router'
+import { useNotes } from '../hooks/useNotes'
+
 import { Header } from '../components/Header'
 import { NotesList } from '../components/NotesList'
 import { NoteWrapper } from '../components/NoteWrapper'
-import { Note } from '../types'
 
 function NotePage() {
-  const [allNotes, setAllNotes] = React.useState<Array<Note>>([])
   const router = useRouter()
   const nid = router.query.nid as string
 
-  React.useEffect(() => {
-    const notes = []
-    localforage
-      .iterate<Note, void>((val, key, i) => {
-        notes.push(val)
-      })
-      .then(result => {
-        notes.sort((a: Note, b: Note) => b.updatedAt - a.updatedAt)
-        setAllNotes(notes)
-      })
-  }, [])
+  const { allNotes } = useNotes(nid)
 
   return (
     <div className="container">
