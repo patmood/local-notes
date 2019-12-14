@@ -18,7 +18,11 @@ export function NotesList({
   const [noteList, setNoteList] = React.useState<Note[]>([])
 
   React.useEffect(() => {
-    setNoteList(Object.keys(allNotes).map(k => allNotes[k]))
+    setNoteList(
+      Object.keys(allNotes)
+        .map(k => allNotes[k])
+        .sort((a: Note, b: Note) => b.updatedAt - a.updatedAt)
+    )
   }, [allNotes])
 
   const filteredNotes = React.useMemo(() => {

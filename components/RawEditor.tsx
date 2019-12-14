@@ -20,8 +20,12 @@ export interface RawEditorProps {
 }
 
 export function RawEditor({ onSave, initialValue }: RawEditorProps) {
-  const [textValue, setTextValue] = React.useState(initialValue)
+  const [textValue, setTextValue] = React.useState('')
   const handleSave = React.useCallback(debounce(onSave, 1000), [onSave])
+
+  React.useEffect(() => {
+    setTextValue(initialValue)
+  }, [initialValue])
 
   function handleChange(text) {
     setTextValue(text)
@@ -44,7 +48,7 @@ export function RawEditor({ onSave, initialValue }: RawEditorProps) {
             display: block;
             max-width: 800px;
             margin: 0 auto;
-            padding: ${style.space3};
+            padding: 0 ${style.space3};
           }
           .cm-s-easymde {
             border-radius: ${style.borderRadius};

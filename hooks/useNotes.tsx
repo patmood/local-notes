@@ -4,12 +4,10 @@ import { Note } from '../types'
 
 const initialState = {
   allNotes: {},
-  activeNote: null,
 }
 
 interface NotesState {
   allNotes: { [nid: string]: Note }
-  activeNote: null | Note
 }
 
 enum NotesAction {
@@ -36,19 +34,18 @@ export function useNotes(nid) {
   const [state, dispatch] = React.useReducer(notesReducer, initialState)
 
   React.useEffect(() => {
-    const notes = []
+    const notes = {}
     localforage
       .iterate<Note, void>((val, key, i) => {
-        notes.push(val)
+        notes[val.id] = val
       })
       .then(result => {
-        notes.sort((a: Note, b: Note) => b.updatedAt - a.updatedAt)
         dispatch({ type: NotesAction.SEED_NOTES, payload: notes })
       })
   }, [])
 
   return {
     allNotes: state.allNotes,
-    activeNote: state.activeNote,
+    activeNote: state.allNotes[nid],
   }
 }
