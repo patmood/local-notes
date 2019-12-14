@@ -6,3 +6,4 @@ TODO:
 - Backup button
 - Import button
 - Updated at timeago
+- Remove faker

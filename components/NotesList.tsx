@@ -3,30 +3,27 @@ import localforage from 'localforage'
 import { Note } from '../types'
 import Link from 'next/link'
 
-export function NotesList({ nid }: { nid?: string }) {
-  const [allNotes, setAllNotes] = React.useState<Array<Note>>([])
-
-  React.useEffect(() => {
-    const notes = []
-    localforage
-      .iterate<Note, void>((val, key, i) => {
-        notes.push(val)
-      })
-      .then(result => setAllNotes(notes))
-  }, [])
-
+export function NotesList({
+  nid,
+  allNotes,
+}: {
+  nid?: string
+  allNotes: Note[]
+}) {
   return (
-    <ol>
-      {allNotes.map(note => (
-        <li key={note.id}>
-          <Link href="/[nid]" as={`/${note.id}`}>
-            <a className="list-link">
-              <div>{note.text.substr(0, 20)}</div>
-              <div>{note.createdAt}</div>
-            </a>
-          </Link>
-        </li>
-      ))}
+    <div className="NotesList">
+      <ol>
+        {allNotes.map(note => (
+          <li key={note.id}>
+            <Link href="/[nid]" as={`/${note.id}`}>
+              <a className="list-link">
+                <div>{note.text.substr(0, 20)}</div>
+                <div>{note.createdAt}</div>
+              </a>
+            </Link>
+          </li>
+        ))}
+      </ol>
       <style jsx>
         {`
           ol {
@@ -45,6 +42,6 @@ export function NotesList({ nid }: { nid?: string }) {
           }
         `}
       </style>
-    </ol>
+    </div>
   )
 }
