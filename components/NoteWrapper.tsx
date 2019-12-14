@@ -29,7 +29,7 @@ export function NoteWrapper({ nid }: { nid: string }) {
     return (
       <h1>
         Note {nid} not found.{' '}
-        <Link href="/n">
+        <Link href="/new">
           <a>Create new one</a>
         </Link>
       </h1>
@@ -38,7 +38,8 @@ export function NoteWrapper({ nid }: { nid: string }) {
 
   function handleSave(text) {
     if (!text) {
-      // TODO: delete note
+      console.log('deleted', nid)
+      localforage.removeItem(nid)
     } else {
       const updatedNote: Note = { ...initialNote, text, updatedAt: Date.now() }
       localforage

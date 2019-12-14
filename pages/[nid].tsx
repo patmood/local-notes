@@ -1,8 +1,8 @@
 import React from 'react'
 import localforage from 'localforage'
 import { useRouter } from 'next/router'
-import { NotesList } from '../../components/NotesList'
-import { NoteWrapper } from '../../components/NoteWrapper'
+import { NotesList } from '../components/NotesList'
+import { NoteWrapper } from '../components/NoteWrapper'
 
 function NotePage() {
   const router = useRouter()
