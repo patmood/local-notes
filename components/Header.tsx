@@ -1,26 +1,30 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { AllNotes } from '../types'
+import { Note, AllNotes } from '../types'
 import { downloadNotes } from '../utils/notes'
+import { FileUploadButton } from './FileUploadButton'
+import { generateNote } from '../utils/notes'
 
 export function Header({
-  createNote,
+  saveNote,
   allNotes,
 }: {
-  createNote: () => string
+  saveNote: (note: Note) => void
   allNotes: AllNotes
 }) {
   const router = useRouter()
 
   function handleClick() {
-    const id = createNote()
-    router.push(`/[nid]`, `/${id}`)
+    const newNote = generateNote()
+    saveNote(newNote)
+    router.push(`/[nid]`, `/${newNote.id}`)
   }
 
   return (
     <header>
       <button onClick={handleClick}>New note</button>
-      <button onClick={() => downloadNotes(allNotes)}>Download Notes</button>
+      <FileUploadButton saveNote={saveNote} />
+      <button onClick={() => downloadNotes(allNotes)}>Download notes</button>
       <style jsx>
         {`
           header {

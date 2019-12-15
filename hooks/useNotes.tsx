@@ -1,7 +1,6 @@
 import React from 'react'
 import localforage from 'localforage'
 import { Note } from '../types'
-import { generateNote } from '../utils/notes'
 
 const initialState = {
   allNotes: {},
@@ -82,11 +81,6 @@ export function useNotes(nid) {
   }, [])
 
   const actions = {
-    createNote: function createNote() {
-      const newNote = generateNote()
-      dispatch({ type: NotesAction.CREATE_NOTE, payload: newNote })
-      return newNote.id
-    },
     saveNote: function saveNote(note: Note) {
       return dispatch({ type: NotesAction.SAVE_NOTE, payload: note })
     },

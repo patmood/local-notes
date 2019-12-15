@@ -2,13 +2,15 @@ import uuid from 'uuid/v1'
 import faker from 'faker'
 import { Note, AllNotes } from '../types'
 
-export function generateNote() {
+export function generateNote(text?: string) {
   const now = Date.now()
   return {
     id: uuid(),
     createdAt: now,
     updatedAt: now,
-    text: `# ${faker.lorem.sentence()}\n\n${faker.lorem.sentence()}\n\n${faker.lorem.sentence()}`,
+    text:
+      text ||
+      `# ${faker.lorem.sentence()}\n\n${faker.lorem.sentence()}\n\n${faker.lorem.sentence()}`,
   } as Note
 }
 
@@ -34,7 +36,7 @@ export function downloadNotes(
   if (window.navigator.msSaveOrOpenBlob) {
     window.navigator.msSaveBlob(blob, filename)
   } else {
-    var elem = window.document.createElement('a')
+    const elem = window.document.createElement('a')
     elem.href = window.URL.createObjectURL(blob)
     elem.download = filename
     document.body.appendChild(elem)

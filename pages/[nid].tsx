@@ -29,7 +29,7 @@ function NotePage() {
         <NotesList activeNote={activeNote} allNotes={allNotes} />
       </aside>
       <main>
-        <Header createNote={actions.createNote} allNotes={allNotes} />
+        <Header saveNote={actions.saveNote} allNotes={allNotes} />
         <section>
           {activeNote && (
             <NoteWrapper
