@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 
-import { Note } from '../types'
+import { Note, AllNotes } from '../types'
 import { SearchInput } from './SearchInput'
 import style from './style'
 import { NoteListItem } from './NoteListItem'
@@ -12,7 +12,7 @@ export function NotesList({
   allNotes,
 }: {
   activeNote: null | Note
-  allNotes: { [nid: string]: Note }
+  allNotes: AllNotes
 }) {
   const [searchText, setSearchText] = React.useState('')
   const [noteList, setNoteList] = React.useState<Note[]>([])
