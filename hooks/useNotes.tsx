@@ -1,6 +1,7 @@
 import React from 'react'
 import localforage from 'localforage'
 import { Note } from '../types'
+import { generateNote } from '../utils/notes'
 
 const initialState = {
   allNotes: {},
@@ -11,6 +12,7 @@ interface NotesState {
 }
 
 enum NotesAction {
+  CREATE_NOTE,
   SEED_NOTES,
   SAVE_NOTE,
   DELETE_NOTE,
@@ -18,22 +20,35 @@ enum NotesAction {
 
 function notesReducer(
   state: NotesState,
-  action: { type: NotesAction; payload: any }
+  action: { type: NotesAction; payload?: any }
 ) {
   switch (action.type) {
     case NotesAction.SEED_NOTES:
       state = { ...state, allNotes: action.payload }
       return state
-    case NotesAction.SAVE_NOTE:
-      const newNote: Note = action.payload
+    case NotesAction.CREATE_NOTE:
+      const newNote = generateNote()
       localforage
         .setItem<Note>(newNote.id, newNote)
-        .then(value => console.log('saved', newNote))
+        .then(value => console.log('created', newNote.id))
       state = {
         ...state,
         allNotes: {
           ...state.allNotes,
           [newNote.id]: newNote,
+        },
+      }
+      return state
+    case NotesAction.SAVE_NOTE:
+      const updatedNote: Note = action.payload
+      localforage
+        .setItem<Note>(updatedNote.id, updatedNote)
+        .then(value => console.log('saved', updatedNote))
+      state = {
+        ...state,
+        allNotes: {
+          ...state.allNotes,
+          [updatedNote.id]: updatedNote,
         },
       }
       return state
@@ -68,6 +83,9 @@ export function useNotes(nid) {
   }, [])
 
   const actions = {
+    createNote: function createNote() {
+      return dispatch({ type: NotesAction.CREATE_NOTE })
+    },
     saveNote: function saveNote(note: Note) {
       return dispatch({ type: NotesAction.SAVE_NOTE, payload: note })
     },

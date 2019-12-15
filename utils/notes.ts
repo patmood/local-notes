@@ -1,11 +1,12 @@
-import uuid from "uuid/v1";
+import uuid from 'uuid/v1'
+import faker from 'faker'
 
-export function createNote(text: string) {
-  const now = Date.now();
+export function generateNote() {
+  const now = Date.now()
   return {
     id: uuid(),
     createdAt: now,
     updatedAt: now,
-    text
-  };
+    text: `# ${faker.lorem.sentence()}\n\n${faker.lorem.sentence()}\n\n${faker.lorem.sentence()}`,
+  }
 }

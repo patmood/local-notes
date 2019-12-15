@@ -2,6 +2,7 @@ import React from 'react'
 
 import { useRouter } from 'next/router'
 import { useNotes } from '../hooks/useNotes'
+import { Note } from '../types'
 
 import { Header } from '../components/Header'
 import { NotesList } from '../components/NotesList'
@@ -13,13 +14,22 @@ function NotePage() {
 
   const { actions, allNotes, activeNote } = useNotes(nid)
 
+  React.useEffect(() => {
+    // Delete empty notes on navigation
+    Object.values<Note>(allNotes).forEach(n => {
+      if (!n.text) {
+        actions.deleteNote(n.id)
+      }
+    })
+  }, [nid])
+
   return (
     <div className="container">
       <aside>
         <NotesList activeNote={activeNote} allNotes={allNotes} />
       </aside>
       <main>
-        <Header />
+        <Header createNote={actions.createNote} />
         <section>
           {activeNote && (
             <NoteWrapper

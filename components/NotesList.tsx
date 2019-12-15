@@ -1,7 +1,7 @@
 import React from 'react'
-import localforage from 'localforage'
+import { useRouter } from 'next/router'
+
 import { Note } from '../types'
-import Link from 'next/link'
 import { SearchInput } from './SearchInput'
 import style from './style'
 import { NoteListItem } from './NoteListItem'
@@ -16,6 +16,7 @@ export function NotesList({
 }) {
   const [searchText, setSearchText] = React.useState('')
   const [noteList, setNoteList] = React.useState<Note[]>([])
+  const router = useRouter()
 
   React.useEffect(() => {
     setNoteList(
@@ -33,6 +34,10 @@ export function NotesList({
       return sourceText.includes(targetText)
     })
   }, [noteList, searchText])
+
+  if (!activeNote && filteredNotes.length > 0) {
+    router.push(`/[nid]`, `/${filteredNotes[0].id}`)
+  }
 
   return (
     <div className="NotesList">

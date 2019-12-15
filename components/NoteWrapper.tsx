@@ -15,12 +15,8 @@ export function NoteWrapper({
   deleteNote: (nid: string) => void
 }) {
   function handleSave(text) {
-    if (!text) {
-      deleteNote(note.id)
-    } else {
-      const updatedNote: Note = { ...note, text, updatedAt: Date.now() }
-      saveNote(updatedNote)
-    }
+    const updatedNote: Note = { ...note, text, updatedAt: Date.now() }
+    saveNote(updatedNote)
   }
 
   return <RawEditor onSave={handleSave} initialValue={note.text} />

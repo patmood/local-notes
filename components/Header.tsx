@@ -1,12 +1,15 @@
 import React from 'react'
 import Link from 'next/link'
 
-export function Header() {
+export function Header({ createNote }: { createNote: () => void }) {
+  function handleClick() {
+    const result = createNote()
+    console.log({ result })
+    // TODO: navigate to note
+  }
   return (
     <header>
-      <Link href="/new">
-        <a>New note</a>
-      </Link>
+      <button onClick={handleClick}>New note</button>
       <style jsx>
         {`
           header {
