@@ -21,7 +21,7 @@ function NotePage() {
         actions.deleteNote(n.id)
       }
     })
-  }, [nid])
+  }, [nid, allNotes])
 
   return (
     <div className="container">
