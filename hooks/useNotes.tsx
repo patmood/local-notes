@@ -12,6 +12,8 @@ interface NotesState {
 
 enum NotesAction {
   SEED_NOTES,
+  SAVE_NOTE,
+  DELETE_NOTE,
 }
 
 function notesReducer(
@@ -20,13 +22,34 @@ function notesReducer(
 ) {
   switch (action.type) {
     case NotesAction.SEED_NOTES:
-      const allNotes = action.payload
-      state = { ...state, allNotes }
+      state = { ...state, allNotes: action.payload }
       return state
-      break
+    case NotesAction.SAVE_NOTE:
+      const newNote: Note = action.payload
+      localforage
+        .setItem<Note>(newNote.id, newNote)
+        .then(value => console.log('saved', newNote))
+      state = {
+        ...state,
+        allNotes: {
+          ...state.allNotes,
+          [newNote.id]: newNote,
+        },
+      }
+      return state
+    case NotesAction.DELETE_NOTE:
+      localforage
+        .removeItem(action.payload)
+        .then(value => console.log('deleted', action.payload))
+      const allNotesWithoutThisOne = state.allNotes
+      delete allNotesWithoutThisOne[action.payload]
+      state = {
+        ...state,
+        allNotes: { ...allNotesWithoutThisOne },
+      }
+      return state
     default:
       return state
-      break
   }
 }
 
@@ -44,8 +67,18 @@ export function useNotes(nid) {
       })
   }, [])
 
+  const actions = {
+    saveNote: function saveNote(note: Note) {
+      return dispatch({ type: NotesAction.SAVE_NOTE, payload: note })
+    },
+    deleteNote: function deleteNote(nid: string) {
+      return dispatch({ type: NotesAction.DELETE_NOTE, payload: nid })
+    },
+  }
+
   return {
     allNotes: state.allNotes,
     activeNote: state.allNotes[nid],
+    actions,
   }
 }

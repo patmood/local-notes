@@ -5,18 +5,21 @@ import Link from 'next/link'
 import { RawEditor } from '../components/RawEditor'
 import { Note } from '../types'
 
-export function NoteWrapper({ note }: { note: Note }) {
+export function NoteWrapper({
+  note,
+  saveNote,
+  deleteNote,
+}: {
+  note: Note
+  saveNote: (note: Note) => void
+  deleteNote: (nid: string) => void
+}) {
   function handleSave(text) {
     if (!text) {
-      // Delete callback
-      // console.log('deleted', nid)
-      // localforage.removeItem(nid)
+      deleteNote(note.id)
     } else {
       const updatedNote: Note = { ...note, text, updatedAt: Date.now() }
-      // Save callback
-      localforage
-        .setItem<Note>(updatedNote.id, updatedNote)
-        .then(value => console.log('saved testnote', value))
+      saveNote(updatedNote)
     }
   }
 

@@ -33,15 +33,13 @@ export function RawEditor({ onSave, initialValue }: RawEditorProps) {
   }
 
   return (
-    <>
-      <div className="wrapper">
-        <SimpleMDE
-          id="primary-editor"
-          value={textValue}
-          onChange={handleChange}
-          options={options}
-        />
-      </div>
+    <div className="wrapper">
+      <SimpleMDE
+        id="primary-editor"
+        value={textValue}
+        onChange={handleChange}
+        options={options}
+      />
       <style jsx global>
         {`
           .wrapper {
@@ -69,6 +67,6 @@ export function RawEditor({ onSave, initialValue }: RawEditorProps) {
           }
         `}
       </style>
-    </>
+    </div>
   )
 }

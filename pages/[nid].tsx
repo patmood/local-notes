@@ -11,7 +11,8 @@ function NotePage() {
   const router = useRouter()
   const nid = router.query.nid as string
 
-  const { allNotes, activeNote } = useNotes(nid)
+  const { actions, allNotes, activeNote } = useNotes(nid)
+
   return (
     <div className="container">
       <aside>
@@ -19,7 +20,15 @@ function NotePage() {
       </aside>
       <main>
         <Header />
-        <section>{activeNote && <NoteWrapper note={activeNote} />}</section>
+        <section>
+          {activeNote && (
+            <NoteWrapper
+              note={activeNote}
+              saveNote={actions.saveNote}
+              deleteNote={actions.deleteNote}
+            />
+          )}
+        </section>
       </main>
       <style jsx>
         {`
