@@ -1,11 +1,12 @@
 import React from 'react'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 
-export function Header({ createNote }: { createNote: () => void }) {
+export function Header({ createNote }: { createNote: () => string }) {
+  const router = useRouter()
+
   function handleClick() {
-    const result = createNote()
-    console.log({ result })
-    // TODO: navigate to note
+    const id = createNote()
+    router.push(`/[nid]`, `/${id}`)
   }
   return (
     <header>

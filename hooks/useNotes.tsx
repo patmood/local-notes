@@ -27,15 +27,14 @@ function notesReducer(
       state = { ...state, allNotes: action.payload }
       return state
     case NotesAction.CREATE_NOTE:
-      const newNote = generateNote()
       localforage
-        .setItem<Note>(newNote.id, newNote)
-        .then(value => console.log('created', newNote.id))
+        .setItem<Note>(action.payload.id, action.payload)
+        .then(value => console.log('created', action.payload.id))
       state = {
         ...state,
         allNotes: {
           ...state.allNotes,
-          [newNote.id]: newNote,
+          [action.payload.id]: action.payload,
         },
       }
       return state
@@ -84,7 +83,9 @@ export function useNotes(nid) {
 
   const actions = {
     createNote: function createNote() {
-      return dispatch({ type: NotesAction.CREATE_NOTE })
+      const newNote = generateNote()
+      dispatch({ type: NotesAction.CREATE_NOTE, payload: newNote })
+      return newNote.id
     },
     saveNote: function saveNote(note: Note) {
       return dispatch({ type: NotesAction.SAVE_NOTE, payload: note })
