@@ -23,7 +23,6 @@ export function FileUploadButton({
           const result = evt.target.result
           if (typeof result === 'string') {
             const json = JSON.parse(result)
-            console.log(json)
             Object.values(json).forEach((v: any) => {
               const { id, text, createdAt, updatedAt } = v
               if (id && text && createdAt && updatedAt) {

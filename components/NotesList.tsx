@@ -41,16 +41,19 @@ export function NotesList({
 
   return (
     <div className="NotesList">
-      <div>
-        <SearchInput onChange={setSearchText} />
-      </div>
-      <ol>
-        {filteredNotes.map(note => (
-          <li key={note.id}>
-            <NoteListItem note={note} />
-          </li>
-        ))}
-      </ol>
+      <SearchInput onChange={setSearchText} />
+      {filteredNotes.length > 0 && (
+        <ol>
+          {filteredNotes.map(note => (
+            <li
+              key={note.id}
+              className={activeNote && note.id === activeNote.id && 'active'}
+            >
+              <NoteListItem note={note} />
+            </li>
+          ))}
+        </ol>
+      )}
       <style jsx>
         {`
           ol {
@@ -65,6 +68,9 @@ export function NotesList({
           }
           li:not(:last-child) {
             border-bottom: ${style.borderWidth} solid ${style.stroke};
+          }
+          .active {
+            background-color: rgba(0, 0, 0, 0.15);
           }
         `}
       </style>

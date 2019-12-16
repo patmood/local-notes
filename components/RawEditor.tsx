@@ -3,13 +3,14 @@ import SimpleMDE from 'react-simplemde-editor'
 import 'easymde/dist/easymde.min.css'
 import debounce from 'lodash/debounce'
 import style from './style'
-import { symbol } from 'prop-types'
 
+// https://github.com/Ionaru/easy-markdown-editor#toolbar-icons
 const options = {
   autofocus: true,
   spellChecker: false,
   uploadImage: false,
-  toolbar: false,
+  toolbar: ['preview', 'side-by-side'],
+  // toolbar: false,
   toolbarTips: false,
   status: false,
 }

@@ -21,7 +21,7 @@ export function Button(props: ButtonProps) {
             font-size: 0.8rem;
           }
           button:hover {
-            background-color: rgba(0, 0, 0, 0.3);
+            background-color: rgba(0, 0, 0, 0.15);
           }
         `}
       </style>

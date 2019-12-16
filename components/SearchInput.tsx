@@ -3,17 +3,21 @@ import style from './style'
 
 export function SearchInput({ onChange }: { onChange: (val: string) => void }) {
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Search"
-        onChange={e => onChange(e.currentTarget.value.trim())}
-      />
+    <>
+      <div className="SearchInput">
+        <input
+          type="text"
+          placeholder="Search"
+          onChange={e => onChange(e.currentTarget.value.trim())}
+        />
+      </div>
       <style jsx>{`
-        div {
+        .SearchInput {
           padding: 0.5rem;
+          display: flex;
         }
         input {
+          flex-grow: 1;
           font-size: 1rem;
           padding: ${style.space1};
           margin: 0;
@@ -22,6 +26,6 @@ export function SearchInput({ onChange }: { onChange: (val: string) => void }) {
           border: ${style.borderWidth} solid ${style.stroke};
         }
       `}</style>
-    </div>
+    </>
   )
 }
