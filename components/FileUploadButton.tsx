@@ -1,5 +1,6 @@
 import React from 'react'
 import { Note } from '../types'
+import { Button } from './Button'
 
 export function FileUploadButton({
   saveNote,
@@ -47,7 +48,7 @@ export function FileUploadButton({
 
   return (
     <>
-      <button onClick={handleClick}>Import notes</button>
+      <Button onClick={handleClick}>Import notes</Button>
       <input type="file" hidden ref={inputRef} onChange={handleChange} />
     </>
   )
