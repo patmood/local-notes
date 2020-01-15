@@ -8,42 +8,24 @@ const sanitizeReg = /\s*\W*/g
 
 export function NotesList({
   activeNote,
-  allNotes,
+  notesList,
   searchText,
 }: {
   activeNote: null | Note
-  allNotes: AllNotes
+  notesList: Note[]
   searchText: string
 }) {
-  const [noteList, setNoteList] = React.useState<Note[]>([])
   const router = useRouter()
 
-  React.useEffect(() => {
-    setNoteList(
-      Object.keys(allNotes)
-        .map(k => allNotes[k])
-        .sort((a: Note, b: Note) => b.updatedAt - a.updatedAt)
-    )
-  }, [allNotes])
-
-  const filteredNotes = React.useMemo(() => {
-    if (!searchText) return noteList
-    return noteList.filter(n => {
-      const sourceText = n.text.toLowerCase().replace(sanitizeReg, '')
-      const targetText = searchText.toLowerCase().replace(sanitizeReg, '')
-      return sourceText.includes(targetText)
-    })
-  }, [noteList, searchText])
-
-  if (!activeNote && filteredNotes.length > 0) {
-    router.push(`/[nid]`, `/${filteredNotes[0].id}`)
-  }
+  // if (!activeNote && notesList.length > 0) {
+  //   router.push(`/[nid]`, `/${notesList[0].id}`)
+  // }
 
   return (
     <div className="NotesList">
-      {filteredNotes.length > 0 && (
+      {notesList.length > 0 && (
         <ol>
-          {filteredNotes.map(note => (
+          {notesList.map(note => (
             <li
               key={note.id}
               className={activeNote && note.id === activeNote.id && 'active'}

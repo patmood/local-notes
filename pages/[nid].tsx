@@ -12,46 +12,48 @@ function NotePage() {
   const router = useRouter()
   const nid = router.query.nid as string
 
-  const [searchText, setSearchText] = React.useState('')
-
-  const { actions, allNotes, activeNote } = useNotes(nid)
+  const { actions, selectors, state } = useNotes(nid)
 
   function handleSearchSubmit(e: FormEvent) {
     e.preventDefault()
-    // TODO: Create or go to top note here
-    console.log('do the thing')
+    if (selectors.filteredNotes.length === 0) {
+      const newNote = actions.createNote(state.searchText)
+      router.push(`/[nid]`, `/${newNote.id}`)
+    } else {
+      router.push(`/[nid]`, `/${selectors.filteredNotes[0].id}`)
+    }
   }
 
   React.useEffect(() => {
     // Delete empty notes on navigation
-    Object.values<Note>(allNotes).forEach(n => {
+    Object.values<Note>(state.allNotes).forEach(n => {
       if (!n.text) {
         actions.deleteNote(n.id)
       }
     })
-  }, [nid, allNotes])
+  }, [nid, state.allNotes])
 
   return (
     <div>
       <Header
         saveNote={actions.saveNote}
-        allNotes={allNotes}
-        setSearchText={setSearchText}
+        allNotes={state.allNotes}
+        setSearchText={actions.setSearchText}
         handleSearchSubmit={handleSearchSubmit}
       />
       <div className="container">
         <aside>
           <NotesList
-            activeNote={activeNote}
-            allNotes={allNotes}
-            searchText={searchText}
+            activeNote={selectors.activeNote}
+            notesList={selectors.filteredNotes}
+            searchText={state.searchText}
           />
         </aside>
         <main>
           <section>
-            {activeNote && (
+            {selectors.activeNote && (
               <NoteWrapper
-                note={activeNote}
+                note={selectors.activeNote}
                 saveNote={actions.saveNote}
                 deleteNote={actions.deleteNote}
               />
