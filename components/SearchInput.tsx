@@ -1,16 +1,22 @@
-import React from 'react'
+import React, { FormEvent } from 'react'
 import style from './style'
 
-export function SearchInput({ onChange }: { onChange: (val: string) => void }) {
+export function SearchInput({
+  onChange,
+  onSubmit,
+}: {
+  onChange: (val: string) => void
+  onSubmit: (e: FormEvent) => void
+}) {
   return (
     <>
-      <div className="SearchInput">
+      <form className="SearchInput" onSubmit={onSubmit}>
         <input
           type="text"
           placeholder="Search"
           onChange={e => onChange(e.currentTarget.value.trim())}
         />
-      </div>
+      </form>
       <style jsx>{`
         .SearchInput {
           padding: 0.5rem;

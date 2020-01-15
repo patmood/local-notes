@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FormEvent } from 'react'
 
 import { useRouter } from 'next/router'
 import { useNotes } from '../hooks/useNotes'
@@ -12,7 +12,15 @@ function NotePage() {
   const router = useRouter()
   const nid = router.query.nid as string
 
+  const [searchText, setSearchText] = React.useState('')
+
   const { actions, allNotes, activeNote } = useNotes(nid)
+
+  function handleSearchSubmit(e: FormEvent) {
+    e.preventDefault()
+    // TODO: Create or go to top note here
+    console.log('do the thing')
+  }
 
   React.useEffect(() => {
     // Delete empty notes on navigation
@@ -24,22 +32,33 @@ function NotePage() {
   }, [nid, allNotes])
 
   return (
-    <div className="container">
-      <aside>
-        <NotesList activeNote={activeNote} allNotes={allNotes} />
-      </aside>
-      <main>
-        <Header saveNote={actions.saveNote} allNotes={allNotes} />
-        <section>
-          {activeNote && (
-            <NoteWrapper
-              note={activeNote}
-              saveNote={actions.saveNote}
-              deleteNote={actions.deleteNote}
-            />
-          )}
-        </section>
-      </main>
+    <div>
+      <Header
+        saveNote={actions.saveNote}
+        allNotes={allNotes}
+        setSearchText={setSearchText}
+        handleSearchSubmit={handleSearchSubmit}
+      />
+      <div className="container">
+        <aside>
+          <NotesList
+            activeNote={activeNote}
+            allNotes={allNotes}
+            searchText={searchText}
+          />
+        </aside>
+        <main>
+          <section>
+            {activeNote && (
+              <NoteWrapper
+                note={activeNote}
+                saveNote={actions.saveNote}
+                deleteNote={actions.deleteNote}
+              />
+            )}
+          </section>
+        </main>
+      </div>
       <style jsx>
         {`
           .container {

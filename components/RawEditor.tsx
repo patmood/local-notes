@@ -9,8 +9,8 @@ const options = {
   autofocus: true,
   spellChecker: false,
   uploadImage: false,
-  toolbar: ['preview', 'side-by-side'],
-  // toolbar: false,
+  // toolbar: ['preview', 'side-by-side'],
+  toolbar: false,
   toolbarTips: false,
   status: false,
 }

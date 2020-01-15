@@ -2,7 +2,6 @@ import React from 'react'
 import { useRouter } from 'next/router'
 
 import { Note, AllNotes } from '../types'
-import { SearchInput } from './SearchInput'
 import style from './style'
 import { NoteListItem } from './NoteListItem'
 const sanitizeReg = /\s*\W*/g
@@ -10,11 +9,12 @@ const sanitizeReg = /\s*\W*/g
 export function NotesList({
   activeNote,
   allNotes,
+  searchText,
 }: {
   activeNote: null | Note
   allNotes: AllNotes
+  searchText: string
 }) {
-  const [searchText, setSearchText] = React.useState('')
   const [noteList, setNoteList] = React.useState<Note[]>([])
   const router = useRouter()
 
@@ -41,7 +41,6 @@ export function NotesList({
 
   return (
     <div className="NotesList">
-      <SearchInput onChange={setSearchText} />
       {filteredNotes.length > 0 && (
         <ol>
           {filteredNotes.map(note => (
