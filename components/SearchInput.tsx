@@ -13,7 +13,7 @@ export function SearchInput({
       <form className="SearchInput" onSubmit={onSubmit}>
         <input
           type="text"
-          placeholder="Search"
+          placeholder="Search or create"
           onChange={e => onChange(e.currentTarget.value.trim())}
         />
       </form>
