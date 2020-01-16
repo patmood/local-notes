@@ -10,7 +10,13 @@ export function SearchInput({
 }) {
   return (
     <>
-      <form className="SearchInput" onSubmit={onSubmit}>
+      <form
+        className="SearchInput"
+        onSubmit={e => {
+          onSubmit(e)
+          onChange('')
+        }}
+      >
         <input
           type="text"
           placeholder="Search or create"
