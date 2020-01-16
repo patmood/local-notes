@@ -1,6 +1,6 @@
-export default {
+export const style = {
   space0: 0,
-  space1: '0.5rem',
+  space1: '0.3rem',
   space2: '1rem',
   space3: '1.5rem',
   space4: '2rem',

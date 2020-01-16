@@ -6,7 +6,7 @@ import { FileUploadButton } from './FileUploadButton'
 import { SearchInput } from './SearchInput'
 import { Button } from './Button'
 import { generateNote } from '../utils/notes'
-import style from './style'
+import { style } from './style'
 
 export function Header({
   saveNote,

@@ -26,12 +26,12 @@ function NotePage() {
 
   React.useEffect(() => {
     // Delete empty notes on navigation
-    Object.values<Note>(state.allNotes).forEach(n => {
+    selectors.notesList.forEach(n => {
       if (!n.text) {
         actions.deleteNote(n.id)
       }
     })
-  }, [nid, state.allNotes])
+  }, [nid])
 
   return (
     <div>
@@ -55,7 +55,6 @@ function NotePage() {
               <NoteWrapper
                 note={selectors.activeNote}
                 saveNote={actions.saveNote}
-                deleteNote={actions.deleteNote}
               />
             )}
           </section>

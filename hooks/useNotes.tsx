@@ -112,14 +112,13 @@ export function useNotes(nid) {
     },
   }
 
-  const getNotesList = React.useMemo(() => {
+  const notesList = React.useMemo(() => {
     return Object.keys(state.allNotes)
       .map(k => state.allNotes[k])
       .sort((a: Note, b: Note) => b.updatedAt - a.updatedAt)
   }, [state.allNotes])
 
   const filteredNotes = React.useMemo(() => {
-    const notesList = getNotesList
     if (!state.searchText) return notesList
     return notesList.filter(n => {
       const sanitizeReg = /\s*\W*/g
@@ -127,10 +126,10 @@ export function useNotes(nid) {
       const targetText = state.searchText.toLowerCase().replace(sanitizeReg, '')
       return sourceText.includes(targetText)
     })
-  }, [state.allNotes, state.searchText])
+  }, [notesList, state.searchText])
 
   const selectors = {
-    getNotesList,
+    notesList,
     filteredNotes,
     activeNote: state.allNotes[nid],
   }

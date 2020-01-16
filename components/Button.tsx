@@ -1,5 +1,5 @@
 import React from 'react'
-import style from './style'
+import { style } from './style'
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   primary?: boolean
@@ -18,7 +18,7 @@ export function Button(props: ButtonProps) {
             padding: ${style.space1} ${style.space2};
             transition: 300ms all;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 1rem;
           }
           button:hover {
             background-color: rgba(0, 0, 0, 0.15);

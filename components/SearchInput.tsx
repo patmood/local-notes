@@ -1,5 +1,5 @@
 import React, { FormEvent } from 'react'
-import style from './style'
+import { style } from './style'
 
 export function SearchInput({
   onChange,
@@ -15,6 +15,7 @@ export function SearchInput({
           type="text"
           placeholder="Search or create"
           onChange={e => onChange(e.currentTarget.value.trim())}
+          autoFocus
         />
       </form>
       <style jsx>{`
@@ -25,7 +26,7 @@ export function SearchInput({
         input {
           flex-grow: 1;
           font-size: 1rem;
-          padding: ${style.space1};
+          padding: ${style.space1} ${style.space2};
           margin: 0;
           display: block;
           border-radius: ${style.borderRadius};

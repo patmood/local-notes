@@ -2,7 +2,7 @@ import React from 'react'
 import SimpleMDE from 'react-simplemde-editor'
 import 'easymde/dist/easymde.min.css'
 import debounce from 'lodash/debounce'
-import style from './style'
+import { style } from './style'
 
 // https://github.com/Ionaru/easy-markdown-editor#toolbar-icons
 const options = {

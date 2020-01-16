@@ -1,10 +1,8 @@
 import React from 'react'
-import { useRouter } from 'next/router'
 
-import { Note, AllNotes } from '../types'
-import style from './style'
+import { Note } from '../types'
+import { style } from './style'
 import { NoteListItem } from './NoteListItem'
-const sanitizeReg = /\s*\W*/g
 
 export function NotesList({
   activeNote,
@@ -15,12 +13,6 @@ export function NotesList({
   notesList: Note[]
   searchText: string
 }) {
-  const router = useRouter()
-
-  // if (!activeNote && notesList.length > 0) {
-  //   router.push(`/[nid]`, `/${notesList[0].id}`)
-  // }
-
   return (
     <div className="NotesList">
       {notesList.length > 0 && (
