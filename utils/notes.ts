@@ -1,16 +1,13 @@
 import uuid from 'uuid/v1'
-import faker from 'faker'
 import { Note, AllNotes } from '../types'
 
-export function generateNote(text?: string) {
+export function generateNote(text: string = '') {
   const now = Date.now()
   return {
     id: uuid(),
     createdAt: now,
     updatedAt: now,
-    text:
-      text ||
-      `# ${faker.lorem.sentence()}\n\n${faker.lorem.sentence()}\n\n${faker.lorem.sentence()}`,
+    text,
   } as Note
 }
 

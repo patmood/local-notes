@@ -10,7 +10,6 @@
   "dependencies": {
     "@zeit/next-css": "1.0.1",
     "date-fns": "^2.9.0",
-    "faker": "^4.1.0",
     "localforage": "1.7.3",
     "lodash": "4.17.15",
     "next": "9.1.5",
