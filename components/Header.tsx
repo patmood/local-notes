@@ -21,27 +21,17 @@ export function Header({
 }) {
   const router = useRouter()
 
-  function handleClick() {
-    const newNote = generateNote()
-    saveNote(newNote)
-    router.push(`/[nid]`, `/${newNote.id}`)
-  }
-
   return (
     <header>
-      <span className="search">
+      <div className="search">
         <SearchInput onChange={setSearchText} onSubmit={handleSearchSubmit} />
-      </span>
-
-      <span className="button">
-        <Button onClick={handleClick}>New note</Button>
-      </span>
-      <span className="button">
+      </div>
+      <div className="button">
         <FileUploadButton saveNote={saveNote} />
-      </span>
-      <span className="button">
+      </div>
+      <div className="button">
         <Button onClick={() => downloadNotes(allNotes)}>Download notes</Button>
-      </span>
+      </div>
       <style jsx>
         {`
           header {
