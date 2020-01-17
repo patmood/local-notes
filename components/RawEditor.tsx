@@ -1,5 +1,5 @@
 import React from 'react'
-import SimpleMDE from 'react-simplemde-editor'
+import MyMDE from './MyMDE'
 import 'easymde/dist/easymde.min.css'
 import debounce from 'lodash/debounce'
 import { style } from './style'
@@ -35,12 +35,7 @@ export function RawEditor({ onSave, initialValue }: RawEditorProps) {
 
   return (
     <div className="wrapper">
-      <SimpleMDE
-        id="primary-editor"
-        value={textValue}
-        onChange={handleChange}
-        options={options}
-      />
+      <MyMDE value={textValue} onChange={handleChange} options={options} />
       <style jsx global>
         {`
           .wrapper {

@@ -3,6 +3,8 @@ import localforage from 'localforage'
 import { Note } from '../types'
 import { generateNote } from '../utils/notes'
 
+const DEBUG = false
+
 const initialState = {
   allNotes: {},
   searchText: '',
@@ -38,7 +40,7 @@ function notesReducer(
     case NotesAction.CREATE_NOTE:
       localforage
         .setItem<Note>(action.payload.id, action.payload)
-        .then(value => console.log('created', action.payload.id))
+        .then(value => DEBUG && console.log('created', action.payload.id))
       state = {
         ...state,
         allNotes: {
@@ -51,7 +53,7 @@ function notesReducer(
       const updatedNote: Note = action.payload
       localforage
         .setItem<Note>(updatedNote.id, updatedNote)
-        .then(value => console.log('saved', updatedNote))
+        .then(value => DEBUG && console.log('saved', updatedNote))
       state = {
         ...state,
         allNotes: {
@@ -63,7 +65,7 @@ function notesReducer(
     case NotesAction.DELETE_NOTE:
       localforage
         .removeItem(action.payload)
-        .then(value => console.log('deleted', action.payload))
+        .then(value => DEBUG && console.log('deleted', action.payload))
       const allNotesWithoutThisOne = state.allNotes
       delete allNotesWithoutThisOne[action.payload]
       state = {
