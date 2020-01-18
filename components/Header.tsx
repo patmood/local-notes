@@ -12,11 +12,13 @@ export function Header({
   saveNote,
   allNotes,
   setSearchText,
+  searchText,
   handleSearchSubmit,
 }: {
   saveNote: (note: Note) => void
   allNotes: AllNotes
   setSearchText: (text: string) => void
+  searchText: string
   handleSearchSubmit: (e: FormEvent) => void
 }) {
   const router = useRouter()
@@ -24,7 +26,11 @@ export function Header({
   return (
     <header>
       <div className="search">
-        <SearchInput onChange={setSearchText} onSubmit={handleSearchSubmit} />
+        <SearchInput
+          onChange={setSearchText}
+          onSubmit={handleSearchSubmit}
+          searchText={searchText}
+        />
       </div>
       <div className="button">
         <FileUploadButton saveNote={saveNote} />

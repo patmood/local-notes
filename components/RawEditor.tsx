@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Ref } from 'react'
 import MyMDE from './MyMDE'
 import 'easymde/dist/easymde.min.css'
 import debounce from 'lodash/debounce'
@@ -18,9 +18,10 @@ const options = {
 export interface RawEditorProps {
   onSave: (text: string) => void
   initialValue: string
+  id: string
 }
 
-export function RawEditor({ onSave, initialValue }: RawEditorProps) {
+export function RawEditor({ onSave, initialValue, id }: RawEditorProps) {
   const [textValue, setTextValue] = React.useState('')
   const handleSave = React.useCallback(debounce(onSave, 1000), [onSave])
 
@@ -28,7 +29,12 @@ export function RawEditor({ onSave, initialValue }: RawEditorProps) {
     setTextValue(initialValue)
   }, [initialValue])
 
-  function handleChange(text) {
+  // React.useEffect(() => {
+  //   // TODO: focus the editor when id changes?
+  //   // elementWrapperRef
+  // }, [id])
+
+  function handleChange(text: string) {
     setTextValue(text)
     handleSave(text)
   }

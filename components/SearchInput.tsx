@@ -4,9 +4,11 @@ import { style } from './style'
 export function SearchInput({
   onChange,
   onSubmit,
+  searchText,
 }: {
   onChange: (val: string) => void
   onSubmit: (e: FormEvent) => void
+  searchText: string
 }) {
   return (
     <>
@@ -21,6 +23,7 @@ export function SearchInput({
           type="text"
           placeholder="Search or create"
           onChange={e => onChange(e.currentTarget.value.trim())}
+          value={searchText}
           autoFocus
         />
       </form>

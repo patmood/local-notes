@@ -15,5 +15,5 @@ export function NoteWrapper({
     saveNote(updatedNote)
   }
 
-  return <RawEditor onSave={handleSave} initialValue={note.text} />
+  return <RawEditor onSave={handleSave} initialValue={note.text} id={note.id} />
 }

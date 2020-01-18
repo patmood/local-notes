@@ -39,6 +39,7 @@ function NotePage() {
         saveNote={actions.saveNote}
         allNotes={state.allNotes}
         setSearchText={actions.setSearchText}
+        searchText={state.searchText}
         handleSearchSubmit={handleSearchSubmit}
       />
       <div className="container">
