@@ -52,12 +52,13 @@ export function RawEditor({ onSave, initialValue, id }: RawEditorProps) {
           .wrapper {
             display: block;
             max-width: 800px;
-            margin: 0 auto;
-            padding: 0 ${style.space3};
-          }
-          .cm-s-easymde {
             border-radius: ${style.borderRadius};
             border: ${style.borderWidth} solid ${style.stroke};
+            margin: 0 auto;
+            padding: 0 ${style.space4};
+          }
+          .cm-s-easymde {
+            border: none;
           }
           .cm-formatting-code-block {
             color: rgba(0, 0, 0, 0.3);

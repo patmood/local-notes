@@ -33,16 +33,21 @@ export function NotesList({
             list-style: none;
             margin: 0;
             padding: 0;
-            border-radius: ${style.borderRadius};
-            border: ${style.borderWidth} solid ${style.stroke};
+            // border-radius: ${style.borderRadius};
+            // border: ${style.borderWidth} solid ${style.stroke};
           }
           li {
             display: flex;
+            border-radius: 0 ${style.borderRadius} ${style.borderRadius} 0;
+            transition: all 200ms;
           }
-          li:not(:last-child) {
-            border-bottom: ${style.borderWidth} solid ${style.stroke};
+          // li:not(:last-child) {
+          //   border-bottom: ${style.borderWidth} solid ${style.stroke};
+          // }
+          li:hover {
+            background-color: rgba(0, 0, 0, 0.05);
           }
-          .active {
+          li.active {
             background-color: rgba(0, 0, 0, 0.15);
           }
         `}

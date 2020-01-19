@@ -16,7 +16,6 @@ export function NoteListItem({ note }: { note: Note }) {
       <small>{formatDistance(new Date(note.updatedAt), new Date())} ago</small>
       <style jsx>{`
         button {
-          flex-grow: 1;
           cursor: pointer;
           text-align: left;
           font-size: 1rem;
@@ -24,6 +23,7 @@ export function NoteListItem({ note }: { note: Note }) {
           background: none;
           padding: 1rem;
           font-size: 0.9em;
+          max-width: 100%;
         }
 
         .preview {
