@@ -23,16 +23,16 @@ export interface RawEditorProps {
 
 export function RawEditor({ onSave, initialValue, id }: RawEditorProps) {
   const [textValue, setTextValue] = React.useState('')
+  const [mdeInstance, setMdeInstance] = React.useState(null)
   const handleSave = React.useCallback(debounce(onSave, 1000), [onSave])
 
   React.useEffect(() => {
     setTextValue(initialValue)
   }, [initialValue])
 
-  // React.useEffect(() => {
-  //   // TODO: focus the editor when id changes?
-  //   // elementWrapperRef
-  // }, [id])
+  React.useEffect(() => {
+    mdeInstance && mdeInstance.codemirror.focus()
+  }, [id])
 
   function handleChange(text: string) {
     setTextValue(text)
@@ -41,7 +41,12 @@ export function RawEditor({ onSave, initialValue, id }: RawEditorProps) {
 
   return (
     <div className="wrapper">
-      <MyMDE value={textValue} onChange={handleChange} options={options} />
+      <MyMDE
+        value={textValue}
+        onChange={handleChange}
+        options={options}
+        getMdeInstance={setMdeInstance}
+      />
       <style jsx global>
         {`
           .wrapper {
